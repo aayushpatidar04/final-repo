@@ -331,9 +331,9 @@ def save_form_data(form_data):
             issue_doc.visit_count += 1
             frappe.db.sql(
                 """
-                UPDATE `tabMaintenance Visit` SET `_assign` = %s, `maintenance_type` = %s, `visit_count` = `visit_count` + 1 WHERE name = %s
+                UPDATE `tabMaintenance Visit` SET `_assign` = %s, `maintenance_type` = %s, `visit_count` = %s WHERE name = %s
             """,
-                (json.dumps(existing_techs), 'Scheduled', code),
+                (json.dumps(existing_techs), 'Scheduled', issue_doc.visit_count, code),
             )
 
             frappe.db.commit()
