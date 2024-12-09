@@ -334,7 +334,7 @@ def save_form_data(form_data):
                 if tech not in existing_techs:
                     existing_techs.append(tech)
             issue_doc._assign = json.dumps(existing_techs)
-            issue_doc.visit_count += 1
+            issue_doc.visit_count = int(issue_doc.visit_count or 0) + 1
             frappe.db.sql(
                 """
                 UPDATE `tabMaintenance Visit` SET `_assign` = %s, `maintenance_type` = %s, `visit_count` = %s WHERE name = %s
