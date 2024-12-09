@@ -174,7 +174,7 @@ def get_context(context=None):
         tasks = frappe.get_all(
             "Assigned Tasks",
             filters={"date": date, "technician": tech.email},
-            fields=["issue_code", "stime", "etime", "rescheduled"],
+            fields=["issue_code", "stime", "etime"],
         )
         for task in tasks:
             time_diff = task.etime - task.stime
@@ -192,7 +192,7 @@ def get_context(context=None):
                 ts = frappe.get_all(
                     "Assigned Tasks",
                     filters={"date": date},
-                    fields=["issue_code", "stime", "etime", "rescheduled", "technician"],
+                    fields=["issue_code", "stime", "etime", "technician"],
                 )
                 for t in ts:
                     if t.stime <= slot["time"] and t.etime > slot["time"]:

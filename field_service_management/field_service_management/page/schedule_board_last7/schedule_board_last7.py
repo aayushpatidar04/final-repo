@@ -179,7 +179,7 @@ def get_context(context=None):
         tasks = frappe.get_all(
             "Assigned Tasks",
             filters={"date": ["in", dates], "technician": tech.email},
-            fields=["issue_code", "stime", "etime", "rescheduled", "date"],
+            fields=["issue_code", "stime", "etime", "date"],
             order_by="date, stime"
         )
         tasks_by_date = {date: [] for date in dates}
@@ -200,7 +200,7 @@ def get_context(context=None):
                     ts = frappe.get_all(
                         "Assigned Tasks",
                         filters={"date": date},
-                        fields=["issue_code", "stime", "etime", "rescheduled", "technician"],
+                        fields=["issue_code", "stime", "etime", "technician"],
                     )
                     for t in ts:
                         if t.stime <= slot["time"] and t.etime > slot["time"]:
