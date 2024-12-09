@@ -83,7 +83,8 @@ def get_context(context=None):
                 issue._assign = " | ".join(assign_list)
             except json.JSONDecodeError:
                 issue._assign = "No one assigned"
-
+        else:
+            issue._assign = "No one assigned"
         #geolocation --------------------------------------------------
         geolocation = frappe.get_all('Address', filters = {'name' : issue.customer_address}, fields = ['geolocation'])
         geolocation = json.loads(geolocation[0].geolocation)
@@ -237,7 +238,7 @@ def get_context(context=None):
                                         <label for="technician">Select Co-Technicians (<span class="text-danger">only if more than one technician required</span>):</label><br>
                                         <select class="form-select technician" style="width:100%" name="technician[]" multiple="multiple" required>"""
                     for item in technicians:
-                        selected = 'selected' if item.email in maintenance._assign else ''
+                        selected = 'selected' if maintenance._assign and item.email in maintenance._assign else ''
                         html_content += '<option value="{email}" {selected}>{email}</option>'.format(
                             email=item.email,
                             selected=selected
