@@ -458,11 +458,12 @@ def update_form_data(form_data):
                 )
             else:
                 issue_doc._assign = ""
+                issue_doc.visit_count = int(issue_doc.visit_count or 1) - 1
                 frappe.db.sql(
                 """
-                    UPDATE `tabMaintenance Visit` SET `_assign` = %s, `maintenance_type` = %s WHERE name = %s
+                    UPDATE `tabMaintenance Visit` SET `_assign` = %s, `maintenance_type` = %s, `visit_count` = %s WHERE name = %s
                 """,
-                    ("", 'Unscheduled', code),
+                    ("", 'Unscheduled', issue_doc.visit_count, code),
                 )
 
             frappe.db.commit()
