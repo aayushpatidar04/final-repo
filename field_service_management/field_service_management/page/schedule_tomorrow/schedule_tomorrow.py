@@ -27,7 +27,8 @@ def get_context(context=None):
                 "description",
                 "maintenance_description",
                 "customer_address",
-                "completion_status"
+                "completion_status",
+                "customer"
             ],
         )
         technicians = frappe.get_all(
@@ -56,7 +57,8 @@ def get_context(context=None):
                 "description",
                 "maintenance_description",
                 "customer_address",
-                "completion_status"
+                "completion_status",
+                "customer"
             ],
         )
         technicians = frappe.get_all(
